@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.defferedPrompt = null;
+
+    setTimeout(() => {
+      console.log("321654897")
+      window.addEventListener('beforeinstallprompt', (e) => {
+        console.log("EVT");
+        e.preventDefault();
+        this.deferredPrompt = e;
+      }, 0);
+    });
+    
+  }
+
+  handleUserInstallation = () => {    
+    prompt();
+
+    // this.deferredPrompt.userChoice.then((choiceResult) => {
+    //     if (choiceResult.outcome === 'accepted') {
+    //       console.log('Good');
+    //     } else {
+    //       console.log('Not Good');
+    //     }
+    //     this.deferredPrompt = null;
+    //   });
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
@@ -20,6 +46,7 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <div onClick={this.handleUserInstallation}>Do you want to install the app?</div>
       </div>
     );
   }
