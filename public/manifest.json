@@ -6,12 +6,12 @@
     {
       "src": "favicon.ico",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/x-icon"
     },
     {
       "src": "12.png",
-      "sizes": "512x512",
-      "type": "image/x-icon"
+      "sizes": "192x192 512x512",
+      "type": "image/png"
     }
   ],
   "start_url": ".",

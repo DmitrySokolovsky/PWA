@@ -17,17 +17,18 @@ class App extends Component {
     
   }
 
-  handleUserInstallation = () => {    
-    prompt();
+  handleUserInstallation = () => {  
+    console.log(this.deferredPrompt);  
+    this.deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Good');
+        } else {
+          console.log('Not Good');
+        }
+        this.deferredPrompt = null;
+    });
 
-    // this.deferredPrompt.userChoice.then((choiceResult) => {
-    //     if (choiceResult.outcome === 'accepted') {
-    //       console.log('Good');
-    //     } else {
-    //       console.log('Not Good');
-    //     }
-    //     this.deferredPrompt = null;
-    //   });
+      
   }
 
   render() {
@@ -45,8 +46,8 @@ class App extends Component {
           >
             Learn React
           </a>
+          <div onClick={this.handleUserInstallation}>Do you want to install the app?</div>
         </header>
-        <div onClick={this.handleUserInstallation}>Do you want to install the app?</div>
       </div>
     );
   }
