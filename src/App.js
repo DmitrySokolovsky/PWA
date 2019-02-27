@@ -1,28 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
 
-class App extends Component {
+function showStateAndProps(text1) {
+    return function(state, props){
+      console.log(state, props);
+      return {text1: text1};
+    };
+}
+
+class _App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      text: "", text1: ""
+    };
+  }
+
+  componentDidMount() {
+   
+  }
+
+  onChange = (e) => {
+    this.setState({text: e.target.value}, function(){console.log(arguments)});
+  }
+
+  onChange1 = (e) => {
+    this.setState(showStateAndProps(e.target.value))
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <input onChange={this.onChange}/>
+        <input onChange={this.onChange1}/>
+        <h1>{this.state.text}</h1>
+        <h1>{this.state.text1}</h1>
       </div>
     );
   }
 }
 
-export default App;
+export default connect(state => state)(_App);
